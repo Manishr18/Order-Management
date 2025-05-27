@@ -1,0 +1,53 @@
+#submitbutton{
+   
+
+    margin-top: 10px;
+    
+    width: 150px;
+}
+#submitbutton:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
+   
+}
+
+.formstyle  { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px; 
+    background: #cdcaca;
+}
+.formcenter h2{
+    margin-bottom: 50px;
+}
+.formcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form{
+    background: white;
+    width: 450px;
+   
+    border-radius: 10px;
+    text-align: center;
+    padding: 10vh 5vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+   
+   
+}
+.form input[type=text],
+.form input[type=number],
+.form input[type=email]{
+    padding: 5px;
+    width: 265px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid grey;
+
+    outline: none;
+}

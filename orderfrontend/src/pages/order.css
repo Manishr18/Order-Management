@@ -1,0 +1,173 @@
+.orderbox{
+    border: 1px solid #e0e0e0;
+    padding: 10px 10px;
+    width: 15vw;
+    border-radius: 8px;
+     box-shadow:  0 6px 20px 0 rgba(0, 0, 0, 0.15);
+
+}
+.totalorder{
+    display: flex;
+    justify-content: space-between;
+}
+.totalorder h4{
+    margin-top: 15px;
+}
+.totalnumber{
+   font-size: 50px;
+   
+}
+.orderbox:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
+}
+.boxstyle{
+    display: flex;
+}
+.background{
+    background-color: #fff;
+    min-height: 100vh;
+    width: 100vw;
+}
+.contenttable{
+    border-collapse: collapse;
+    margin:25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    margin-left: 100px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+.contenttable thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+.contenttable th,
+.contenttable td{
+    padding: 12px 15px;
+}
+.contenttable tbody tr{
+    border-bottom: 1px solid #dddddd;
+   
+}
+.contenttable tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.contenttable tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+}
+.ordertable{
+    width: 100%;
+    border-collapse: collapse;
+}
+.ordertable th{
+     background-color: #f8f9fa; 
+    color: #555;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+.ordertable td{
+     padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+}
+.ordertable thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+.buttonalign{
+    justify-content: space-between;
+}
+
+.recentorders{
+   
+    border: 1px solid #e0e0e0;
+   
+    width:fit-content;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 55px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    
+}
+.recentorders h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.ordertable tr:last-child td {
+    border-bottom: none;
+}
+.placeorder{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+   
+   padding: 25px 0;
+  width: 300px;
+  height: 50vh;
+  
+  margin-top: 25px;
+ 
+  
+}
+.ordercard{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+   margin-top: 25px;
+    
+    
+}
+.placeorder button{
+    width: 150px;
+    margin-top: 5px;
+    position: relative;
+    bottom: 50px;
+    
+  
+}
+.boxicon{
+   margin-bottom: 10px;
+   position: relative;
+   top: 40px;
+   
+}
+.body{
+    background-color: #eee;
+    width: 100vw;
+    height: 100vh;
+}
+#submitbutton{
+     margin-top: 10px;
+    
+    width: 150px;
+    border: 1px solid #e0e0e0;
+}
+#submitbutton:hover{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.formstyle{
+      display: flex;
+      flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px; 
+    background: #cdcaca;
+}
