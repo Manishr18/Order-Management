@@ -1,0 +1,5 @@
+package com.ecommerce.stockcontroller;
+
+public class StockController {
+
+}

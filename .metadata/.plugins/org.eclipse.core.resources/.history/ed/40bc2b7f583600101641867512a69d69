@@ -1,0 +1,9 @@
+package com.ecommerce.email.model;
+
+public class OrderDto {
+	private String message;
+	private String status;
+	private Order order;
+	private String email;
+
+}

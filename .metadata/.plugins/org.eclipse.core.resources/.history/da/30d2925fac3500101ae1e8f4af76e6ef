@@ -1,0 +1,62 @@
+package com.ecommerce.consumer;
+
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+import com.ecommerce.base_domain.dto.Order;
+import com.ecommerce.base_domain.dto.OrderEvent;
+import com.ecommerce.kafkaproducer.KafkaProducer;
+import com.ecommerce.model.StockDetails;
+import com.ecommerce.repository.stockrepo;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class OrderConsumer {
+	private static final Logger LOGGER=LoggerFactory.getLogger(OrderConsumer.class);
+	private final KafkaProducer kafkaproducer;
+	private final stockrepo Stockrepo;
+	
+	public OrderConsumer(KafkaProducer kafkaproducer, stockrepo stockrepo) {
+		super();
+		this.kafkaproducer = kafkaproducer;
+		Stockrepo = stockrepo;
+	}
+	
+
+	  @Transactional
+	    @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
+	    public void consume(OrderEvent orderEvent) {
+	        Order order = orderEvent.getOrder();
+	        Long productId = order.getProductId();  
+	        int quantity = order.getQuantity();
+
+	        Optional<StockDetails> stockOpt = Stockrepo.findById(productId);
+
+	        if (stockOpt.isPresent()) {
+	            StockDetails stock = stockOpt.get();
+	            if (stock.getAvailablequantity() >= quantity) {
+	                stock.setAvailablequantity(stock.getAvailablequantity() - quantity);
+	                Stockrepo.save(stock);
+	                LOGGER.info("Stock updated for product {}. Remaining quantity: {}", productId, stock.getAvailablequantity());
+	                order.setStatus("ORDER_PLACED");
+	                kafkaproducer.sendmessage(new OrderEvent("Stock deducted and order placed", "SUCCESS", order));
+	                LOGGER.info("Stock updated for product {}. Remaining quantity: {}", productId, stock.getAvailablequantity());
+	            } else {
+	                LOGGER.warn("Insufficient stock for product {}. Available: {}, Requested: {}", productId, stock.getAvailablequantity(), quantity);
+	                order.setStatus("Failed");
+	                kafkaproducer.sendmessage(new OrderEvent("Order Failed due to No Stock", "FAILED", order));
+	                
+	            }
+	        } else {
+	            LOGGER.error("Product not found with ID: {}", productId);
+	            order.setStatus("FAILED");
+	            kafkaproducer.sendmessage(new OrderEvent("Order Failed due to Not Found", "FAILED", order));
+	            
+	        }
+	    }
+	}
