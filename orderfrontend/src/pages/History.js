@@ -36,7 +36,7 @@ const History = () => {
                             <td>{order.orderId}</td>
                             <td>{order.name}</td>
                             <td>{order.quantity}</td>
-                            <td>{order.price}*{order.quantity}</td>
+                            <td>{order.price}</td>
                             <td>{order.status}</td>
                             <td>{order.message}</td>
                             <td>{order.email}</td>

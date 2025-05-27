@@ -20,7 +20,8 @@ public class Sender {
 		String to=order.getEmail();
 		String subject="Order status "+ order.getStatus();
 		  String body = (order.getMessage() != null && !order.getMessage().isBlank())
-	                ? order.getName() + " " + order.getMessage()
+	                ? "name:" + " " +order.getName() +" "+ "price:" + " " +order.getPrice() +" "+ "quantity:" +" "+ order.getQuantity() +" "+
+	                		order.getMessage()
 	                : getDefaultMessage(event);
 
 	        sendEmail(to, subject, body);
@@ -28,7 +29,8 @@ public class Sender {
 
 	    private String getDefaultMessage(OrderEvent event) {
 	        if ("SUCCESS".equalsIgnoreCase(event.getStatus())) {
-	            return event.getOrder().getName() + "Your order has been placed successfully!";
+	            return "order name:" + event.getOrder().getName()+"order price" + event.getOrder().getPrice()+ "quantity"+event.getOrder().getQuantity()
+	            		+ "Your order has been placed successfully!";
 	        } else if ("FAILED".equalsIgnoreCase(event.getStatus())) {
 	            return "Order failed due to insufficient stock.";
 	        } else {
