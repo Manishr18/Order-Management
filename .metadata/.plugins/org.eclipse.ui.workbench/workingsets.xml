@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
-<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1745307683160_0" label="Java Main Sources" name="Java Main Sources"/>
-<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1745307683243_1" label="Java Test Sources" name="Java Test Sources"/>
-<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1745307693351_2" label="Window Working Set" name="Aggregate for window 1745307693351"/>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748614706805_0" label="Java Main Sources" name="Java Main Sources"/>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748614706877_1" label="Java Test Sources" name="Java Test Sources"/>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748623211935_3" label="ordermanagement" name="ordermanagement">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Order-Management" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Gateway" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/base-domain" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/emailservice" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/order-service" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/stock-service" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748614716375_2" label="Window Working Set" name="Aggregate for window 1748614716374"/>
 </workingSetManager>

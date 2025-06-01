@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - order-service
+      - stock-service
+      - email-service
+    networks:
+      - om-network
+
+  order-service:
+    image: order-service
+	environment:
+		SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/orderdetails
+		SPRING_DATASOURCE_USERNAME: root
+		SPRING_DATASOURCE_PASSWORD: root
+    build:
+      context: ./order-service
+    ports:
+      - "8081:8081"
+    networks:
+      - om-network
+
+  stock-service:
+    image: stock-service
+	environment:
+		SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/stockdetails
+		SPRING_DATASOURCE_USERNAME: root
+		SPRING_DATASOURCE_PASSWORD: root
+		
+    build:
+      context: ./stock-service
+    ports:
+      - "8082:8082"
+    networks:
+      - om-network
+
+  email-service:
+    image: emailservice
+    build:
+      context: ./emailservice
+    ports:
+      - "8083:8083"
+    networks:
+      - om-network
+	  
+  mysql:
+	image: mysql:8.0
+	environment:
+	   MYSQL_ROOT_PASSWORD: root
+	   MYSQL_DATABASE: StockDetails
+	ports:
+	   - "3306:3306"
+	networks:
+	   - om-network
+
+networks:
+  om-network:
+    driver: bridge

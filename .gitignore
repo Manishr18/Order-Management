@@ -1,0 +1,19 @@
+# Java / Spring Boot
+**/target/
+**/*.log
+**/*.class
+
+# Node / React
+**/node_modules/
+**/build/
+
+# IDE and OS files
+*.iml
+.idea/
+.vscode/
+.DS_Store
+.metadata/
+
+# Docker
+**/.env
+**/docker-compose.override.yml
