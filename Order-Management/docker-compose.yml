@@ -1,0 +1,119 @@
+version: "3.8"
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - order-service
+      - stock-service
+      - email-service
+    networks:
+      - om-network
+
+  order-service:
+    image: order-service
+    build:
+      context: ./order-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/orderdetails
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - om-network
+
+  stock-service:
+    image: stock-service
+    build:
+      context: ./stock-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/stockdetails
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8083:8083"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - om-network
+
+  email-service:
+    image: emailservice
+    build:
+      context: ./emailservice
+    ports:
+      - "8086:8086"
+    networks:
+      - om-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - om-network
+
+  # Kafka service
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka
+    ports:
+      - "9092:9092"
+      - "9999:9999" # JMX port
+    environment:
+      KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENERS: PLAINTEXT://kafka:9092,CONTROLLER://kafka:9093,HOST://localhost:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,HOST://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,HOST:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      CLUSTER_ID: "jbshzVwTSs2wr1mGHpnyZg"
+    volumes:
+      - kafka_data:/var/lib/kafka
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --bootstrap-server kafka:9092 --list || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - om-network
+
+  frontend: 
+    build:
+      context: ../orderfrontend
+    ports:
+      - "3000:3000"
+    networks:
+      - om-network
+
+volumes:
+  mysql-data:
+  kafka_data:
+
+networks:
+  om-network:
+    driver: bridge

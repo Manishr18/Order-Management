@@ -1,0 +1,19 @@
+# Java
+**/target/
+*.class
+
+# Spring Boot
+*.log
+*.jar
+
+# IDE
+*.iml
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+*.env
